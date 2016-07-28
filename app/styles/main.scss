@@ -1,8 +1,27 @@
-$icon-font-path: '../fonts/';
-$color_1: black;
-$color_2: darkblue;
+/* Mobile-First Responsive Layout
+ * See the media queries at the bottom for adjustments to desktops
+ */
+
+$color_background: #eee;
+$color_products: darkblue;
+$color_text_shadow: #ddd;
 $font-family_1: FontAwesome;
 $font-family_2: 'Arvo', courier, serif;
+
+@mixin section-background-image($file-name) {
+  background-image: url($file-name);
+  background-repeat: no-repeat;
+  background-size: cover;
+  height: 100%;
+  padding-top: 3em;
+}
+
+@mixin font-awesome-icon($icon-name) {
+  content: $icon-name;
+  font-family: $font-family_1;
+  padding-left: 0.5em;
+  vertical-align: middle;
+}
 
 // bower:scss
 @import "bower_components/bootstrap-sass/assets/stylesheets/_bootstrap.scss";
@@ -11,11 +30,58 @@ $font-family_2: 'Arvo', courier, serif;
 @import "bower_components/bootstrap-social/bootstrap-social.scss";
 // endbower
 
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  text-align: center;
+  font-family: $font-family_2;
+  text-shadow: 2px 2px 2px $color_text_shadow;
+}
+
+h1 {
+  margin-bottom: 20px;
+}
+
+h2 {
+  font-size: 23px;
+  margin-bottom: 20px;
+}
+
 .browserupgrade {
-  margin: 0.2em 0;
   background: #ccc;
   color: #000;
+  margin: 0.2em 0;
   padding: 0.2em 0;
+}
+
+.btn {
+  margin-top: 0.5em;
+}
+
+.btn-showme {
+  &:after {
+    @include font-awesome-icon("\f061");
+  }
+}
+
+.btn-learnmore {
+  margin-top: 2em;
+  &:after {
+    @include font-awesome-icon("\f103");
+  }
+}
+
+.btn-home {
+  &:after {
+    @include font-awesome-icon("\f015");
+  }
+}
+
+.container-fluid {
+  padding: 0;
 }
 
 .content-template {
@@ -23,195 +89,98 @@ $font-family_2: 'Arvo', courier, serif;
   text-align: center;
 }
 
-/* Everything but the jumbotron gets side spacing for mobile first views */
-.footer,
-.header {
-  padding-left: 15px;
-  padding-right: 15px;
+/* Custom page footer */
+.footer {
+  background-color: $color_background;
+  border-top: 1px solid $color_background;
+  color: #777;
+  padding: 0.5em 1em 0.125em 1em;
 }
 
 /* Custom page header */
 .header {
-  border-bottom: 1px solid #e5e5e5;
+  border-bottom: 1px solid $color_background;
+  padding-left: 15px;
+  padding-right: 15px;
 
   /* Make the masthead heading the same height as the navigation */
   h3 {
-    margin-top: 0;
-    margin-bottom: 0;
     line-height: 40px;
+    margin-bottom: 0;
+    margin-top: 0;
     padding-bottom: 19px;
   }
 }
 
-/* Custom page footer */
-.footer {
-  padding-top: 0.5em;
-  padding-bottom: 0.125em;
-  // margin-bottom: 1em;
-  color: #777;
-  border-top: 1px solid #e5e5e5;
-  background-color: lightgray;
-}
-
-.container-narrow > hr {
-  margin: 30px 0;
-}
-
-.container-fluid {
-  padding: 0px;
-}
-
-/* Main marketing message and sign up button */
-.jumbotron {
-  border-bottom: 1px solid #e5e5e5;
-  color: $color_1;
-  background-image: url('../images/earth.jpg');
-  background-repeat: no-repeat;
-  background-size: cover;
-  height: 100%;
-  padding-top: 100px;
-  margin-bottom: 0;
-  h1 {
-    font-family: $font-family_2;
-    font-size: 2.5em;
-    text-shadow: 2px 2px 2px #ddd;
-    margin-bottom: 20px;
-  }
-}
-
-.vertical-align {
-  display: flex;
-  align-items: center;
+.headshot {
+  border: 2px solid #888;
+  border-radius: 1em;
+  box-shadow: 4px 5px 28px -2px;
+  width: 200px;
 }
 
 .hr-top {
-  height: 1em;
   border: 0;
   box-shadow: 0 10px 10px -10px #8c8b8b inset;
+  height: 1em;
 }
-.headshot {
-  border-radius: 1em;
-  border: 2px solid #888;
-  width: 200px;
-  box-shadow: 4px 5px 28px -2px;
+
+.jumbotron {
+  @include section-background-image( '../images/earth.jpg');
+  border-bottom: 1px solid $color_background;
+  margin-bottom: 0;
+  padding-top: 6em;
+  h1 {
+    font-family: $font-family_2;
+    font-size: 2.5em;
+    margin-bottom: 20px;
+    text-shadow: 2px 2px 2px $color_text_shadow;
+  }
 }
+
 .projectpanel {
-  transition: all 0.3s ease 0s;
-  width: 100%;
   margin-top: 20px;
   margin-bottom: 12px;
+  transition: all 0.3s ease 0s;
+  width: 100%;
   &:hover {
     transform: scale(1.04);
-    border-color: $color_2;
+    border-color: $color_products;
     // border-width: 3px;
   }
 }
-.section-projects {
-  height: 100%;
-  padding-top: 3em;
-  background-image: url('../images/laptop.jpg');
-  background-repeat: no-repeat;
-  background-size: cover;
-}
+
 .section-contact {
-  height: 100%;
-  padding-top: 3em;
-  background-image: url('../images/writing.jpg');
-  background-repeat: no-repeat;
-  background-size: cover;
+  @include section-background-image( '../images/writing.jpg');
 }
 
-a.btn-showme {
-  font-size: 130%;
-  &:after {
-    font-family: $font-family_1;
-    content: "\f061";
-    padding-left: 0.5em;
-    vertical-align: middle;
-  }
-}
-a.btn-learnmore {
-  margin-top: 2em;
-  // position: absolute;
-  // bottom: 20px;
-  // right: 20px;
-  &:after {
-    font-family: $font-family_1;
-    content: "\f103";
-    padding-left: 8px;
-    padding-right: 8px;
-    vertical-align: middle;
-  }
-}
-a.btn-home {
-  // margin-top: 1em;
-  // position: absolute;
-  // bottom: 20px;
-  // right: 20px;
-  &:after {
-    font-family: $font-family_1;
-    content: "\f015";
-    padding-left: 8px;
-    padding-right: 8px;
-    vertical-align: middle;
-  }
+.section-projects {
+  @include section-background-image( '../images/laptop.jpg');
 }
 
-.btn {
-  margin-top: 0.5em;
-}
-h1,
-h2,
-h3,
-h4,
-h5,
-h6 {
-  font-family: $font-family_2;
-  text-shadow: 2px 2px 2px #ddd;
-  text-align: center;
-}
-
-h1 {
-  margin-bottom: 20px;
-}
-h2 {
-  font-size: 23px;
-  margin-bottom: 20px;
-}
 
 /* Responsive: Portrait tablets and up */
 @media screen and (min-width: 768px) {
-  // .container {
-  //   max-width: 730px;
-  // }
-  /* Space out content a bit */
-  body {
-    // padding-top: 2px;
-    // padding-bottom: 2px;
-    width: 100%;
+  // Want the image to appear fullscreen
+  body, html {
     height: 100%;
+    width: 100%;
   }
 
-  html {
-    width: 100%;
-    height: 100%;
+  h2 {
+    font-size: 30px;
   }
+
+  .btn-home {
+    margin-top: 3em;
+  }
+
   .container-fluid {
     height: 100%;
   }
-  .navbar {
-    padding: 20px 0;
-    -webkit-transition: background 0.5s ease-in-out, padding 0.5s ease-in-out;
-    -moz-transition: background 0.5s ease-in-out, padding 0.5s ease-in-out;
-    transition: background 0.5s ease-in-out, padding 0.5s ease-in-out;
-  }
-  .top-nav-collapse {
-    padding: 0;
-  }
 
   /* Remove the padding we set earlier */
-  .footer,
-  .header {
+  .footer {
     padding-left: 0;
     padding-right: 0;
   }
@@ -219,42 +188,53 @@ h2 {
   /* Space out the masthead */
   .header {
     margin-bottom: 30px;
+    padding-left: 0;
+    padding-right: 0;
   }
 
-  /* Remove the bottom border on the jumbotron for visual effect */
   .jumbotron {
     border-bottom: 0;
     padding-bottom: 150px;
-  }
-
-  .prod {
-    font-family: $font-family_2;
-    font-size: 120%;
-    text-shadow: 1px 1px 1px #ccc;
-    margin: 22px;
-    color: $color_2;
-  }
-  h2 {
-    font-size: 30px;
-  }
-
-  .nav {
-    font-family: $font-family_2;
-  }
-  .navbar-brand {
-    font-family: $font-family_2;
-  }
-  .navbar-nav {
-    font-size: 120%;
-  }
-  .jumbotron {
     padding-top: 150px;
     h1 {
       font-size: 4em;
       margin-bottom: 0.5em;
     }
   }
-  a.btn-home {
-    margin-top: 3em;
+
+  .nav {
+    font-family: $font-family_2;
+  }
+
+  .navbar {
+    -webkit-transition: background 0.5s ease-in-out, padding 0.5s ease-in-out;
+    -moz-transition: background 0.5s ease-in-out, padding 0.5s ease-in-out;
+    transition: background 0.5s ease-in-out, padding 0.5s ease-in-out;
+    padding: 20px 0;
+  }
+
+  .navbar-brand {
+    font-family: $font-family_2;
+  }
+
+  .navbar-nav {
+    font-size: 120%;
+  }
+
+  .prod {
+    color: $color_products;
+    font-family: $font-family_2;
+    font-size: 120%;
+    margin: 22px;
+    text-shadow: 1px 1px 1px $color_text_shadow;
+  }
+
+  .section-contact,
+  .section-projects {
+    padding-top: 3em;
+  }
+
+  .top-nav-collapse {
+    padding: 0;
   }
 }
